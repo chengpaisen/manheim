@@ -46,8 +46,7 @@ class CR():
         data = {
             'utf8': '✓',
             'authenticity_token': authenticity_token,
-            'user[username]': 'yuzhongkai',
-            'user[password]': 'sl8m79mg3',
+     
             'submit': 'Login',
         }
         self.s.post(login_url, data=data) # 登陆
