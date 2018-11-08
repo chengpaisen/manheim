@@ -346,29 +346,33 @@ class CR():
     #
     #     html=etree.HTML(html_str)
             print('开始打印图片url')
-            all_num=html.xpath('//a[@id="all"]/text()')[0]#.split(' ')[1].lstrip('(').rstrip(')'))
-            print(all_num)
-            exter_num=int(html.xpath('//a[@id="exterior"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
-            inter_num=int(html.xpath('//a[@id="interior"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
-            misc_num=int(html.xpath('//a[@id="misc"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
-            # damages_num=html.xpath('//a[@id="damages"]/text()')[0].split(' ')[1][0]
-            ext_list,int_list,misc_list,dam_list =[],[],[],[]
-            for i in range(all_num):
-                if i < exter_num:
-                    exter_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
-                    ext_list.append(exter_url)
-                elif i < exter_num + inter_num:
-                    inter_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
-                    int_list.append(inter_url)
-                elif i < exter_num + inter_num + misc_num:
-                    misc_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
-                    misc_list.append(misc_url)
-                else:
-                    dam_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
-                    dam_list.append(dam_url)
-            print(ext_list,int_list,misc_list,dam_list)
+            # all_num=html.xpath('//a[@id="all"]/text()')[0]#.split(' ')[1].lstrip('(').rstrip(')'))
+            # print(all_num)
+            # exter_num=int(html.xpath('//a[@id="exterior"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
+            # inter_num=int(html.xpath('//a[@id="interior"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
+            # misc_num=int(html.xpath('//a[@id="misc"]/text()')[0].split(' ')[1].lstrip('(').rstrip(')'))
+            # # damages_num=html.xpath('//a[@id="damages"]/text()')[0].split(' ')[1][0]
+            # ext_list,int_list,misc_list,dam_list =[],[],[],[]
+            # for i in range(all_num):
+            #     if i < exter_num:
+            #         exter_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
+            #         ext_list.append(exter_url)
+            #     elif i < exter_num + inter_num:
+            #         inter_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
+            #         int_list.append(inter_url)
+            #     elif i < exter_num + inter_num + misc_num:
+            #         misc_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
+            #         misc_list.append(misc_url)
+            #     else:
+            #         dam_url=html.xpath("//div[@id='thumbnail-slider']/a[{}]/span/img/@src" .format(i+1))[0].split('?')[0]
+            #         dam_list.append(dam_url)
+            # print
+            exterior_url_list=html.xpath("//div[@id='thumbnail-slider']/a[@class='gallery_thumb_car exterior']/span/img/@src")
+            interior_url_list=html.xpath("//div[@id='thumbnail-slider']/a[@class='gallery_thumb_car interior']/span/img/@src")
+            misc_url_list=html.xpath("//div[@id='thumbnail-slider']/a[@class='gallery_thumb_car misc']/span/img/@src")
+            damages_url_list=html.xpath("//div[@id='thumbnail-slider']/a[@class='gallery_thumb_car damages']/span/img/@src")
             self.mon_db.update({'_id': CR_url_id},
-                        {'$set': {'ext_list':ext_list,'int_list':int_list,'misc_list':misc_list,'dam_list':dam_list}})
+                        {'$set': {'exterior':exterior_url_list,'interior':interior_url_list,'misc':misc_url_list,'damages':damages_url_list}})
 
         CR.map_heat_num += 1
 
