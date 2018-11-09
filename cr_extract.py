@@ -46,8 +46,7 @@ class CR():
         data = {
             'utf8': '✓',
             'authenticity_token': authenticity_token,
-            'user[username]': 'yuzhongkai',
-            'user[password]': 'sl8m79mg3',
+     
             'submit': 'Login',
         }
         self.s.post(login_url, data=data) # 登陆
@@ -382,6 +381,7 @@ class CR():
         # cr_url = self.get_redis_data()[1]
         # 死循环，不断从redis获取cr_url，发送请求执行爬取
         # 拿到一个cr_url，执行爬取
+
         while True:
             CR_url_id,CR_url = self.get_redis_data()
             print('正在处理：_id:%s cr_url:%s' %(CR_url_id,CR_url))
