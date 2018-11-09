@@ -28,8 +28,7 @@ class CR():
         self.s = requests.session()
         self.s.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'}
         self.url = 'https://www.manheim.com'
-        self.username = 'yuzhongkai'
-        self.password = 'sl8m79mg3'
+
 
         self.rediscli = redis.Redis(host='192.168.199.132', port=6379, db=0, decode_responses=True)
         self.mongocli = pymongo.MongoClient(host='192.168.199.132', port=27017)
@@ -52,6 +51,7 @@ class CR():
             'utf8': '✓',
             'authenticity_token': authenticity_token,
      
+            
             'submit': 'Login',
         }
         self.s.post(login_url, data=data) # 登陆
