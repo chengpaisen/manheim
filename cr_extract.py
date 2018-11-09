@@ -1,9 +1,13 @@
+import random
+
 import requests
 from lxml import etree
 import pymongo
 import redis
 import json
 import re
+import time
+
 
 # def parse_CR_url(CR_url):
 #     resp = requests.get(CR_url,session=self.session)
@@ -24,7 +28,8 @@ class CR():
         self.s = requests.session()
         self.s.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'}
         self.url = 'https://www.manheim.com'
-
+        self.username = 'yuzhongkai'
+        self.password = 'sl8m79mg3'
 
         self.rediscli = redis.Redis(host='192.168.199.132', port=6379, db=0, decode_responses=True)
         self.mongocli = pymongo.MongoClient(host='192.168.199.132', port=27017)
@@ -387,7 +392,7 @@ class CR():
             CR_url_id,CR_url = self.get_redis_data()
             print('正在处理：_id:%s cr_url:%s' %(CR_url_id,CR_url))
             self.extract_CR_page(CR_url_id,CR_url)
-
+            time.sleep(random.randint(5,8))
 
 # with open('./CR_new_page_test4.html') as f:
 #     page_html_str = f.read()
